@@ -1,6 +1,4 @@
-# Project Title (Update)
-
-D&D Character Manager
+# Factorio Throughput Tracker
 
 ## Instructions for Build and Use
 
@@ -28,9 +26,9 @@ To recreate the development environment, you need the following software and/or 
 
 I found these websites useful in developing this software:
 
-* [Website Title](Link)
-*
-*
+* [Firebase Console](https://console.firebase.google.com/)
+* [gitignore.io](https://www.toptal.com/developers/gitignore)
+* []()
 
 ## Future Work
 

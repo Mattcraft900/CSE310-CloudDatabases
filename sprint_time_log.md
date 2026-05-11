@@ -24,11 +24,18 @@ The expected minimum amount of time each Sprint for each category is as follows:
 
 ## Time Log
 
-|Date      |Category                |Description                                 |Total Minutes|
-|----------|:----------------------:|--------------------------------------------|:-----------:|
-| 4/27/26  | Individual Project     | Working on Module 1 Plan                   | 150            |
-| 4/28/26  | Group (in-class)       | Project Planning, some Sprint Planning     | 45            |
-|          |                        |                                            |             |
+|Date      |Category |Description                                 |Total Minutes|
+|----------|:-------:|--------------------------------------------|:-----------:|
+| 4/27/26  | IM      | Working on Module 1 Plan                   | 2:30        |
+| 4/28/26  | MTG/TP  | Project Planning, some Sprint Planning     | 0:45        |
+| 4/28/26  | IM      | Finish Module 1 Plan and setting up repo   | 1:00        |
+| 5/4/26   | TP      | Created wireframe on Figma                 | 1:00        |
+| 5/5/26   | MTG/TP  | Standup/collaboration                      | 1:00        |
+| 5/5/26   | TP      | Set up HTML framework                      | 1:00        |
+| 5/5/26   | IM      | Research, set up Firebase                  | 2:00        |
+| 5/7/26   |     |                     |         |
+|   |     |                     |         |
+|   |     |                     |         |
 
 _Note: Add more rows as needed._
 
@@ -36,7 +43,7 @@ _Note: Add more rows as needed._
 
 |Categroy                       |Total Time (Hours:Minutes)|
 |-------------------------------|:------------------------:|
-|IM - Individual Module         |                          |
-|TP - Team Project              |                          |
-|MTG - Class Meetings           |                          |
-|**TOTAL**                      |                          |
+|IM - Individual Module         | 5:30                     |
+|TP - Team Project              | 4:00                     |
+|MTG - Class Meetings           | 4:00                     |
+|**TOTAL**                      | 13:30                    |
