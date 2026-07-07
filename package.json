@@ -1,0 +1,26 @@
+{
+  "name": "deathless-cloud-db",
+  "version": "1.0.0",
+  "description": "Cloud database admin and API for the Deathless D&D campaign site",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "db:setup": "node scripts/setup-db.js",
+    "seed:profiles": "node scripts/seed-profiles.js",
+    "seed:travelogue": "node scripts/import-travelogue-md.js",
+    "seed": "npm run seed:profiles && npm run seed:travelogue",
+    "clean:markdown": "node scripts/clean-markdown.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "method-override": "^3.0.0",
+    "pg": "^8.13.1"
+  }
+}

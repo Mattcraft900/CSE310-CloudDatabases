@@ -1,0 +1,77 @@
+<%- include('../../partials/header', { title: isNew ? 'New Profile' : 'Edit Profile' }) %>
+
+<h2><%= isNew ? 'New Profile' : 'Edit Profile' %></h2>
+
+<form method="POST" action="<%= isNew ? '/admin/profiles' : '/admin/profiles/' + profile.id + '?_method=PUT' %>" class="form-grid">
+    <fieldset>
+        <legend>Identity</legend>
+        <label>Name <input name="name" value="<%= profile.name || '' %>" required></label>
+        <label>Full name <input name="full_name" value="<%= profile.full_name || '' %>"></label>
+        <label>Category
+            <select name="category">
+                <% ['party','opc','npc'].forEach(function(c) { %>
+                <option value="<%= c %>" <%= profile.category === c ? 'selected' : '' %>><%= c %></option>
+                <% }); %>
+            </select>
+        </label>
+        <label>Snippet <input name="snippet" value="<%= profile.snippet || '' %>"></label>
+        <label>Player name <input name="player_name" value="<%= profile.player_name || '' %>"></label>
+    </fieldset>
+
+    <fieldset>
+        <legend>Stats</legend>
+        <label>Gender <input name="gender" value="<%= profile.gender || '' %>"></label>
+        <label>Species <input name="species" value="<%= profile.species || '' %>"></label>
+        <label>Age <input name="age" value="<%= profile.age || '' %>"></label>
+        <label>Birthday <input name="birthday" value="<%= profile.birthday || '' %>"></label>
+        <label>Height <input name="height" value="<%= profile.height || '' %>"></label>
+        <label>Weight <input name="weight" value="<%= profile.weight || '' %>"></label>
+        <label>Level <input name="level" type="number" value="<%= profile.level ?? '' %>"></label>
+        <label>Image filename <input name="image_filename" value="<%= profile.image_filename || '' %>" placeholder="e.g. lucy.jpg"></label>
+        <label>Location (home) <input name="location_home" value="<%= profile.location_home || '' %>"></label>
+        <label>Location (last seen) <input name="location_last" value="<%= profile.location_last || '' %>"></label>
+    </fieldset>
+
+    <fieldset>
+        <legend>Classes</legend>
+        <div id="classes-container">
+            <% const cls = classes.length ? classes : [{ class_name: '', subclass: '', level: '' }]; %>
+            <% cls.forEach(function(c, i) { %>
+            <div class="class-row">
+                <input name="class_name" placeholder="Class" value="<%= c.class_name || '' %>">
+                <input name="class_level" type="number" placeholder="Level" value="<%= c.level ?? '' %>">
+                <input name="class_subclass" placeholder="Subclass" value="<%= c.subclass || '' %>">
+                <button type="button" class="remove-class" aria-label="Remove class">×</button>
+            </div>
+            <% }); %>
+        </div>
+        <button type="button" id="add-class" class="button secondary">+ Add class</button>
+    </fieldset>
+
+    <fieldset class="full-width">
+        <legend>Description (Lucy's Notes)</legend>
+        <p class="hint">One paragraph per blank line. Use &lt;angle brackets&gt; for Nemah's voice.</p>
+        <textarea name="description" rows="14"><%= descriptionText %></textarea>
+    </fieldset>
+
+    <div class="form-actions full-width">
+        <button type="submit" class="button"><%= isNew ? 'Create' : 'Save' %></button>
+        <a href="/admin/profiles">Cancel</a>
+    </div>
+</form>
+
+<%- include('../../partials/footer', { scripts: `
+<script>
+document.getElementById('add-class').addEventListener('click', () => {
+    const row = document.createElement('div');
+    row.className = 'class-row';
+    row.innerHTML = '<input name="class_name" placeholder="Class"><input name="class_level" type="number" placeholder="Level"><input name="class_subclass" placeholder="Subclass"><button type="button" class="remove-class">×</button>';
+    document.getElementById('classes-container').appendChild(row);
+});
+document.getElementById('classes-container').addEventListener('click', (e) => {
+    if (e.target.classList.contains('remove-class')) {
+        const rows = document.querySelectorAll('.class-row');
+        if (rows.length > 1) e.target.closest('.class-row').remove();
+    }
+});
+</script>` }) %>

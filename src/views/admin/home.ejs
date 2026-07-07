@@ -1,0 +1,21 @@
+<%- include('../partials/header', { title: 'Home' }) %>
+
+<% if (message) { %>
+<p class="message success"><%= message %></p>
+<% } %>
+
+<h2>Admin Home</h2>
+<p>Manage campaign data for the Deathless site.</p>
+
+<ul class="action-list">
+    <li><a class="button" href="/admin/profiles">Manage Profiles</a></li>
+    <li><a class="button" href="/admin/travelogue/sessions">Manage Travelogue</a></li>
+</ul>
+
+<h3>Quick links</h3>
+<ul>
+    <li><a href="/api/profiles">GET /api/profiles</a></li>
+    <li><a href="/api/travelogue/sessions">GET /api/travelogue/sessions</a></li>
+</ul>
+
+<%- include('../partials/footer') %>

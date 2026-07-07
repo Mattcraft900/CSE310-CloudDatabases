@@ -1,6 +1,9 @@
 # Service Account File for Firebase
 factorio-throughput-manager-firebase-adminsdk-fbsvc-21171e6b3b.json
 
+# Node.js
+node_modules/
+
 # Created by https://www.toptal.com/developers/gitignore/api/python,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,windows
 

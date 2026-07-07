@@ -33,7 +33,7 @@ The expected minimum amount of time each Sprint for each category is as follows:
 | 5/5/26   | MTG/TP  | Standup/collaboration                      | 1:00        |
 | 5/5/26   | TP      | Set up HTML framework                      | 1:00        |
 | 5/5/26   | IM      | Research, set up Firebase                  | 2:00        |
-| 5/7/26   |     |                     |         |
+| 7/6/26   | IM      | Worked on a frontend UX for way too long   | 3:00        |
 |   |     |                     |         |
 |   |     |                     |         |
 
