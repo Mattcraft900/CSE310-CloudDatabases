@@ -1,128 +1,56 @@
 # Deathless Cloud Database
 
-Admin web app and read-only JSON API for the **Deathless** D&D campaign site — stores character profiles and Lucy's travelogue in a PostgreSQL cloud database (Supabase or Neon).
+A cloud-backed admin app and JSON API for the **Deathless** D&D campaign site. It stores character profiles and Lucy's travelogue in PostgreSQL (Supabase), with a simple web UI for full CRUD and public read endpoints for a future Node.js front end.
 
-## Features
+**Live demo (no install required):** https://YOUR-RENDER-APP.onrender.com/admin  
+*(Replace with your Render URL. Free-tier apps may take ~30 seconds to wake after idle.)*
 
-- **Admin UI** — full CRUD for profiles (with multi-class rows) and travelogue (sessions + sections)
-- **Public API** — `GET /api/profiles`, `GET /api/travelogue/sessions` for the future Deathless Node site
-- **Seed scripts** — import from `data/characters.json` and `data/lucys-travelogue.md`
+## Instructions for Build and Use
 
-## Prerequisites
+Steps to build and/or run the software:
 
-- [Node.js](https://nodejs.org/) 18 or newer
-- A free [Supabase](https://supabase.com/) or [Neon](https://neon.tech/) PostgreSQL database
+1. Clone this repository and install dependencies: `npm install`
+2. Create a free [Supabase](https://supabase.com/) project. In the dashboard, click **Connect**, copy a **Session pooler** URI, replace `[YOUR-PASSWORD]` with your database password, and put it in a `.env` file as `DATABASE_URL=...` (see `.env.example`).
+3. Create tables and load seed data: `npm run db:setup` then `npm run seed`
+4. Start the server: `npm start`
+5. Open http://localhost:3000/admin in a browser
 
-## Setup
+*(Optional — cloud hosting already set up for grading: push to GitHub, create a Render Web Service with build `npm install`, start `npm start`, and set the same `DATABASE_URL` environment variable.)*
 
-### 1. Clone and install
+Instructions for using the software:
 
-```bash
-npm install
-```
-
-### 2. Configure database
-
-Copy the example env file and add your connection string:
-
-```bash
-cp .env.example .env
-```
-
-Edit `.env` and set `DATABASE_URL` to your Supabase/Neon URI. For Supabase, use **Project Settings → Database → Connection string → URI**. For production on Render, prefer the **connection pooler** URL.
-
-### 3. Create tables
-
-```bash
-npm run db:setup
-```
-
-### 4. Import seed data
-
-Clean the Google Docs export (if you haven't already) and import:
-
-```bash
-npm run clean:markdown
-npm run seed
-```
-
-Or run individually:
-
-```bash
-npm run seed:profiles
-npm run seed:travelogue
-```
-
-### 5. Run locally
-
-```bash
-npm start
-```
-
-Open [http://localhost:3000/admin](http://localhost:3000/admin)
-
-## API endpoints
-
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/profiles` | All profiles with nested classes |
-| GET | `/api/profiles/:id` | Single profile |
-| GET | `/api/travelogue/sessions` | All sessions with nested sections |
-| GET | `/api/travelogue/sessions/:id` | Single session with sections |
-
-## Deploy to Render (free tier)
-
-1. Push this repo to GitHub.
-2. Create a [Render](https://render.com/) **Web Service** connected to the repo.
-3. Settings:
-   - **Build command:** `npm install`
-   - **Start command:** `npm start`
-   - **Environment:** add `DATABASE_URL` (your Supabase/Neon pooler URI)
-4. After deploy, run `npm run db:setup` and `npm run seed` once using Render Shell or locally against the same database.
-5. Visit `https://your-app.onrender.com/admin`
-
-> Render free tier sleeps after ~15 minutes idle; the first request may take ~30 seconds to wake.
-
-## Project structure
-
-```
-src/
-  server.js           Express entry point
-  db/schema.sql       PostgreSQL tables
-  routes/api.js       Public read API
-  routes/admin-*.js   Admin CRUD
-  views/              EJS templates
-data/
-  characters.json     Structured character stats
-  lucys-travelogue.md Cleaned Google Doc export
-scripts/
-  setup-db.js         Apply schema
-  seed-profiles.js    Import profiles
-  import-travelogue-md.js
-```
-
-## Data conventions
-
-- Optional fields use SQL `NULL`, not empty strings.
-- Bio and travelogue content is stored as **jsonb paragraph arrays**.
-- Voice markup uses `<angle brackets>` for Nemah; parsed at display time on the public site.
+1. Open the live Render URL above (or http://localhost:3000/admin if running locally). If the page is slow the first time, wait for the free service to wake up.
+2. From the home page, choose **Manage Profiles** or **Manage Travelogue**.
+3. **Profiles:** list, create, edit, or delete characters; add class rows and bio paragraphs (blank line = new paragraph; `<angle brackets>` = Nemah's voice).
+4. **Travelogue:** list sessions → open a session → add/edit/delete sections (optional in-game date + paragraph body).
+5. To inspect the public API (read-only), visit `/api/profiles` and `/api/travelogue/sessions` on the same host.
 
 ## Development Environment
 
-| Software | Version |
-|----------|---------|
-| Node.js | 18+ |
-| npm | 9+ |
-| PostgreSQL | 15+ (via Supabase/Neon) |
+To recreate the development environment, you need the following software and/or libraries with the specified versions:
 
-## Useful links
+* Node.js 18 or newer (developed with Node.js 24 / npm 11)
+* npm (comes with Node.js)
+* A PostgreSQL database via Supabase (free tier) — connection string in `.env` as `DATABASE_URL`
+* Project dependencies (installed via `npm install`): express 4.21.x, pg 8.13.x, ejs 3.1.x, dotenv 16.4.x, method-override 3.0.x
+* Optional for hosting: a free [Render](https://render.com/) Web Service (Node runtime)
 
-- [Supabase Docs](https://supabase.com/docs)
-- [Express.js](https://expressjs.com/)
-- [Render Docs](https://render.com/docs)
+## Useful Websites to Learn More
 
-## Future work
+I found these websites useful in developing this software:
 
-- [ ] HTTP basic auth on `/admin` routes
-- [ ] Connect Deathless WDD131 site to `/api/*`
-- [ ] Image upload (optional; filenames only for now)
+* [Supabase — Connect to your database](https://supabase.com/docs/guides/database/connecting-to-postgres)
+* [Express.js documentation](https://expressjs.com/)
+* [node-postgres (pg) documentation](https://node-postgres.com/)
+* [Render — Deploy Node apps](https://render.com/docs/deploy-node-express-app)
+* [MDN — HTTP / REST basics](https://developer.mozilla.org/en-US/docs/Web/HTTP)
+* [Cursor/Claude AI](https://cursor.com/dashboard)
+
+## Future Work
+
+The following items I plan to fix, improve, and/or add to this project in the future:
+
+* [ ] Add password protection (HTTP basic auth) on `/admin` so the URL is not fully public
+* [ ] Connect the Deathless public site to `GET /api/profiles` and `GET /api/travelogue/sessions` instead of hard-coded JS (I have a full frontend website coded as part of a project for a different class; making them work together is a little too big for the scope of this project right now)
+* [ ] Multi-character commentary: logins mapped to party members, with per-character display styles
+* [ ] Optional image upload for profile mugshots (filenames only for now)
