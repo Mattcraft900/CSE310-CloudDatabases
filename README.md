@@ -2,8 +2,8 @@
 
 A cloud-backed admin app and JSON API for the **Deathless** D&D campaign site. It stores character profiles and Lucy's travelogue in PostgreSQL (Supabase), with a simple web UI for full CRUD and public read endpoints for a future Node.js front end.
 
-**Live demo (no install required):** https://YOUR-RENDER-APP.onrender.com/admin  
-*(Replace with your Render URL. Free-tier apps may take ~30 seconds to wake after idle.)*
+**Live demo (no install required):** https://cse310-clouddatabases.onrender.com/admin  
+*(Note: may may take ~30 seconds to wake after idle.)*
 
 ## Instructions for Build and Use
 
